@@ -1,7 +1,14 @@
-const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+import Guest from "@/components/Guest";
+import { currentUser } from "@clerk/nextjs/server";
 
-export default Home
+export default async function HomePage() {
+  const user = await currentUser();
+  if (!user) {
+    return <Guest />;
+  }
+  return (
+    <div className="">
+      <h1>Home Page</h1>
+    </div>
+  );
+}
